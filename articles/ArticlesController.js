@@ -59,11 +59,7 @@ router.post("/articles/delete", (req, res) => {
 });
 
 router.get("/admin/articles/edit/:id", (req, res) => {
-    const {id} = req.params;
-
-    if(isNaN(id)){
-        return res.redirect("/admin/articles");
-    }
+    var id = req.params.id;
 
     Article.findByPk(id).then(article => {
         if(article != undefined) {
@@ -71,10 +67,10 @@ router.get("/admin/articles/edit/:id", (req, res) => {
             res.render("admin/articles/edit", {article})
 
         }else {
-            res.redirect("/admin/articles")
+            res.redirect("/")
         }
     }).catch(error => {
-        res.redirect("/admin/articles");
+        res.redirect("/");
     });
 });
 
